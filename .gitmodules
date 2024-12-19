@@ -1,0 +1,3 @@
+[submodule "hello_world/onchain-verification/lib/forge-std"]
+	path = hello_world/onchain-verification/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
