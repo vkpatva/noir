@@ -1,4 +1,5 @@
-import { compile, createFileManager } from "@noir-lang/noir_wasm";
+import { createFileManager } from "@noir-lang/noir_wasm";
+import circuitJson from "./target/hello_world.json";
 import { UltraHonkBackend } from "@aztec/bb.js";
 import { Noir } from "@noir-lang/noir_js";
 import initNoirC from "@noir-lang/noirc_abi";
@@ -6,7 +7,6 @@ import initACVM from "@noir-lang/acvm_js";
 import acvm from "@noir-lang/acvm_js/web/acvm_js_bg.wasm?url";
 import noirc from "@noir-lang/noirc_abi/web/noirc_abi_wasm_bg.wasm?url";
 await Promise.all([initACVM(fetch(acvm)), initNoirC(fetch(noirc))]);
-import circuitJson from "./target/hello_world.json";
 
 export async function getCircuit() {
   const fm = createFileManager("/");
@@ -21,6 +21,7 @@ function uint8ArrayToHex(uint8Array) {
     .map((byte) => byte.toString(16).padStart(2, "0"))
     .join("");
 }
+
 document.getElementById("submit").addEventListener("click", async () => {
   try {
     const { program } = await getCircuit();
